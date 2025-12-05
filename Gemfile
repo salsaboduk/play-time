@@ -43,15 +43,20 @@ gem 'thruster', require: false
 group :development, :test do
   # Static analysis for security vulnerabilities [https://brakemanscanner.org/]
   gem 'brakeman', require: false
+
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem 'debug', platforms: %i[mri windows], require: 'debug/prelude'
+
   # Use Rspec for testing
   gem 'factory_bot_rails', '~> 6.5', '>= 6.5.1'
   gem 'rspec-rails', '~> 8.0', '>= 8.0.2'
+  gem 'shoulda-matchers', '~> 7.0', '>= 7.0.1'
+
   # Use rubocop for linting
   gem 'rubocop-factory_bot', '~> 2.28'
   gem 'rubocop-rails', '~> 2.34', '>= 2.34.2'
   gem 'rubocop-rspec', '~> 3.8'
+
   # LSP
   gem 'rubocop-lsp'
   gem 'ruby-lsp-brakeman'
