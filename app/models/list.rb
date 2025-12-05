@@ -1,4 +1,5 @@
 ## Represents a list or column on the board.
 class List < ApplicationRecord
-  validates_presence_of(:name)
+  has_many  :task, dependent: :destroy
+  validates :name, presence(value)
 end
