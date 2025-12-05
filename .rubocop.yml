@@ -17,6 +17,3 @@ Rspec/DescribedClass:
 
 Rspec/ImplicitExpect:
   Enabled: false
-
-RSpecRails/InferredSpecType:
-  Enabled: false
