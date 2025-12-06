@@ -9,10 +9,21 @@
 #   end
 
 # Lists
-List.create(
+List.destroy_all
+List.create!(
   [
     { name: 'Backlog' },
     { name: 'In Progress' },
     { name: 'Done' }
+  ]
+)
+
+starting_list = List.first
+
+Task.create!(
+  [
+    { name: 'First story', list: starting_list },
+    { name: 'Second story', list: starting_list },
+    { name: 'Third story', list: starting_list }
   ]
 )
