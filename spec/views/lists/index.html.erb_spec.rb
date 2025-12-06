@@ -1,20 +1,20 @@
 require 'rails_helper'
 
-RSpec.describe "lists/index", type: :view do
-  before(:each) do
+RSpec.describe 'lists/index', type: :view do
+  before do
     assign(:lists, [
-      List.create!(
-        name: "Name"
-      ),
-      List.create!(
-        name: "Name"
-      )
-    ])
+             List.create!(
+               name: 'Name'
+             ),
+             List.create!(
+               name: 'Name'
+             )
+           ])
   end
 
-  it "renders a list of lists" do
+  it 'renders a list of lists' do
     render
-    cell_selector = 'div>p'
-    assert_select cell_selector, text: Regexp.new("Name".to_s), count: 2
+    cell_selector = 'strong'
+    assert_select cell_selector, text: Regexp.new('Name'), count: 2
   end
 end

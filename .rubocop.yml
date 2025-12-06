@@ -17,3 +17,6 @@ Rspec/DescribedClass:
 
 Rspec/ImplicitExpect:
   Enabled: false
+
+RSpec/MultipleExpectations:
+  Enabled: false
