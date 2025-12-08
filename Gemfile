@@ -17,6 +17,7 @@ gem 'stimulus-rails'
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem 'jbuilder'
 # Use Bootstrap and SASS
+gem 'bootstrap', '~> 5.3.5'
 gem 'dartsass-rails', '~> 0.5.1'
 gem 'foreman', '~> 0.90.0'
 
@@ -70,5 +71,6 @@ end
 
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
+  gem 'annotate'
   gem 'web-console'
 end
