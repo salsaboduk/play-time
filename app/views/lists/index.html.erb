@@ -3,11 +3,10 @@
 <% content_for :title, "Lists" %>
 
 <h1>Lists</h1>
-
-<ul id='lists'>
+<div class='row'>
   <% @lists.each do |list| %>
     <%= render list %>
   <% end %>
-</ul>
+</div>
 
 <%= link_to "New list", new_list_path %>

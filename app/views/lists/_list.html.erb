@@ -1,7 +1,9 @@
-<li id="<%= dom_id list %>">
-  <p>
-    <strong>Name:</strong>
-    <%= list.name %>
-  </p>
 
-</li>
+<div class='col list'>
+<div class='list-head text-center'>
+  <%= list.name %>
+</div>
+<% list.task.each do |task| %>
+  <%= render task %>
+<% end %>
+</div>
