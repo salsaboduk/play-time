@@ -1,5 +1,6 @@
 
-<div id='<%= dom_id list %>' class='col list' data-controller="move-task" data-move-task-target='list'  data-action='drop->move-task#dragDrop' data-action='dragover->move-task#allowDrop'>
+<div id='<%= dom_id list %>' class='col list' data-controller="move-task" 
+     data-move-task-target='list'  data-action='drop->move-task#dragDrop dragover->move-task#allowDrop'>
 <div class='list-head text-center'>
   <%= list.name %>
 </div>

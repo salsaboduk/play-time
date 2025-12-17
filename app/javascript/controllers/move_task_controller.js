@@ -14,12 +14,18 @@ export default class extends Controller {
   // drop
   dragDrop(ev) {
     ev.preventDefault()
+    console.log(ev.target.id);
     var data = ev.dataTransfer.getData("text");
-    ev.target.appendChild(document.getElementById(data));
+    console.log(data);
+    if (ev.target.id.includes('list')){
+      ev.target.appendChild(document.getElementById(data));
+    } else if(ev.target.id.includes('task')){
+      ev.target.parentNode.appendChild(document.getElementById(data));
+    }
   }
 
   // dragover
   allowDrop(ev) {
-    ev.preventDefault()
+    ev.preventDefault();
   }
 }
