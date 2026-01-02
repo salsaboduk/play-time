@@ -8,19 +8,19 @@ export default class extends Controller {
   }
 
   startDrag(ev) {
-    ev.dataTransfer.setData("text", ev.target.id);
+    ev.dataTransfer.setData("dragee", ev.target.id);
   }
 
   // drop
   dragDrop(ev) {
     ev.preventDefault()
     console.log(ev.target.id);
-    var data = ev.dataTransfer.getData("text");
+    var dragee = ev.dataTransfer.getData("dragee");
     console.log(data);
     if (ev.target.id.includes('list')){
-      ev.target.appendChild(document.getElementById(data));
+      ev.target.appendChild(document.getElementById(dragee));
     } else if(ev.target.id.includes('task')){
-      ev.target.parentNode.appendChild(document.getElementById(data));
+      ev.target.parentNode.appendChild(document.getElementById(dragee));
     }
   }
 
