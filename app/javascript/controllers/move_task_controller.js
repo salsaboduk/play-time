@@ -29,4 +29,16 @@ export default class extends Controller {
   allowDrop(ev) {
     ev.preventDefault();
   }
+
+  toggleHidden(ev){
+    let btn = ev.currentTarget;
+    let storyBit = document.getElementById(btn.id.replace('toggle', 'hide'));
+    if (storyBit.hidden){
+      storyBit.hidden = false;
+      btn.innerText = '+';
+    } else {
+      storyBit.hidden = true;
+      btn.innerText = '-';
+    }
+  }
 }
