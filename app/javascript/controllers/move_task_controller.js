@@ -35,10 +35,10 @@ export default class extends Controller {
     let storyBit = document.getElementById(btn.id.replace('toggle', 'hide'));
     if (storyBit.hidden){
       storyBit.hidden = false;
-      btn.innerText = '+';
+      btn.innerText = '-';
     } else {
       storyBit.hidden = true;
-      btn.innerText = '-';
+      btn.innerText = '+';
     }
   }
 }
