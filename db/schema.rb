@@ -20,9 +20,11 @@ ActiveRecord::Schema[8.0].define(version: 2025_12_05_225105) do
   create_table "tasks", force: :cascade do |t|
     t.string "name"
     t.integer "list_id", null: false
+    t.integer "position", null: false
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["list_id"], name: "index_tasks_on_list_id"
+    t.index ["list_id", "position"], name: "index_tasks_on_list_id_and_position"
   end
 
   add_foreign_key "tasks", "lists"

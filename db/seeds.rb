@@ -22,8 +22,9 @@ starting_list = List.first
 
 Task.create!(
   [
-    { name: 'First story', list: starting_list },
-    { name: 'Second story', list: starting_list },
-    { name: 'Third story', list: starting_list }
+    { name: 'James', position: 1, list: starting_list },
+    { name: 'Julia', position: 2, list: starting_list },
+    { name: 'Justin', position: 3, list: starting_list },
+    { name: 'Jemmima', position: 4, list: starting_list }
   ]
 )
