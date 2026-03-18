@@ -1,8 +1,9 @@
 <div id='<%= dom_id task %>' draggable='true' data-move-task-target='task' 
-     class='task' data-action='dragstart->move-task#startDrag'>
+     class='task' data-action='dragstart->move-task#startDrag'
+     aria-rowindex = '<%= task.position %>'>
   <h5>
     Name: <%= task.name %>
-    <span id='<%= dom_id task, 'toggle' %>' class='float-end' data-action='click->move-task#toggleHidden'>+</span>
+    <span id='<%= dom_id task, 'toggle' %>' class='float-end small' data-action='click->move-task#toggleHidden'>+</span>
   </h5> 
   <div id='<%= dom_id task, 'hide' %>' hidden>
     <h6>Stuff for the task</h6>

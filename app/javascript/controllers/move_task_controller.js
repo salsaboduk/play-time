@@ -3,6 +3,8 @@ import { Controller } from "@hotwired/stimulus"
 // Connects to data-controller="move-task"
 export default class extends Controller {
 
+  static targets = ['task', 'list']
+
   connect() {
     console.log ('Hello from task mover')
   }
@@ -15,13 +17,16 @@ export default class extends Controller {
   // drop
   dragDrop(ev) {
     ev.preventDefault()
-    console.log('drop target ' + ev.currentTarget.id);
-    var dragee = ev.dataTransfer.getData("dragee");
-    console.log('dragee ' + dragee);
-    if (ev.currentTarget.id.includes('list')){
-      ev.currentTarget.appendChild(document.getElementById(dragee));
-    } else if(ev.currentTarget.id.includes('task')){
-      ev.currentTarget.parentNode.appendChild(document.getElementById(dragee));
+    let dropTarget = document.getElementById(this.hasTaskTarget ? this.taskTarget.id : this.listTarget.id)
+    console.log('ev.currentTarget ' + ev.currentTarget.id)
+    console.log('drop target ' + dropTarget.id);
+    let dragee = document.getElementById(ev.dataTransfer.getData("dragee"));
+    console.log('dragee ' + dragee.id);
+
+    if (dropTarget.id.includes('list')){
+      dropTarget.appendChild(dragee);
+    } else if(dropTarget.id.includes('task')){
+      dropTarget.before(dragee);
     }
   }
 
