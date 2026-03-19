@@ -12,10 +12,10 @@ Metrics/BlockLength:
 Style/FrozenStringLiteralComment:
   Enabled: false
 
-Rspec/DescribedClass:
+RSpec/DescribedClass:
   Enabled: false
 
-Rspec/ImplicitExpect:
+RSpec/ImplicitExpect:
   Enabled: false
 
 RSpec/MultipleExpectations:
