@@ -4,6 +4,7 @@ import { Controller } from "@hotwired/stimulus"
 export default class extends Controller {
 
   static targets = ['task', 'list']
+  buster = new Object()
 
   connect() {
     console.log ('Hello from task mover')
@@ -17,16 +18,17 @@ export default class extends Controller {
   // drop
   dragDrop(ev) {
     ev.preventDefault()
-    let dropTarget = document.getElementById(this.hasTaskTarget ? this.taskTarget.id : this.listTarget.id)
-    console.log('ev.currentTarget ' + ev.currentTarget.id)
-    console.log('drop target ' + dropTarget.id);
+    console.log('ev.target ' + ev.target);
+    this.getTarget(ev.target);
+    var dropTarget = document.getElementById(this.buster);
+    console.log('dropTarget ' + dropTarget.id);
     let dragee = document.getElementById(ev.dataTransfer.getData("dragee"));
     console.log('dragee ' + dragee.id);
 
-    if (dropTarget.id.includes('list')){
+    if (dropTarget.id.includes('list_')){
       dropTarget.appendChild(dragee);
-    } else if(dropTarget.id.includes('task')){
-      dropTarget.before(dragee);
+    } else if(dropTarget.id.includes('task_')){
+      dropTarget.after(dragee);
     }
   }
 
@@ -44,6 +46,18 @@ export default class extends Controller {
     } else {
       storyBit.hidden = true;
       btn.innerText = '+';
+    }
+  }
+
+  getTarget(node){
+    //console.log('Node.id "' + node.id +'"')
+    if (node.id.match(/^list_/) || node.id.match(/^task_/)) {
+      console.log('found ' + node.id);
+      if(node.id !== '') { this.buster = node.id }
+    } else if (node.id.includes('lists')) {
+      throw('too high up the chain');
+    } else {
+      this.getTarget(node.parentElement);
     }
   }
 }
