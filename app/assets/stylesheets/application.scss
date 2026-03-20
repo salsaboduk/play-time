@@ -1,30 +1,30 @@
 // Sassy
-@import 'bootstrap';
+@import "bootstrap";
 
-.title-bar{
-    color: $blue;
-    background-color: $pink;
+.title-bar {
+  color: $blue;
+  background-color: $pink;
 }
 
 .list {
-    border: solid black 1px;
-    margin: 2px;
-    padding: 0
+  border: solid black 1px;
+  margin: 2px;
+  padding: 0;
 }
 
 .list-head {
-    margin: 0;
-    color: $yellow;
-    background-color: $green;
+  margin: 0;
+  color: $yellow;
+  background-color: $green;
 }
 
 .task {
-    background-color: $yellow-100;
-    border-radius: 10px;
-    padding: 5px;
-    margin: 5px;
+  background-color: $yellow-100;
+  border-radius: 10px;
+  padding: 5px;
+  margin: 5px;
 }
 
 #lists li {
-display: block
+  display: block;
 }
