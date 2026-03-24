@@ -12,24 +12,24 @@ export default class extends Controller {
 
   startDrag(ev) {
     console.log(' clicked ' + ev.currentTarget.id)
+    console.log('taskTarget ' + this.taskTarget.id)
     ev.dataTransfer.setData("dragee", ev.currentTarget.id);
   }
 
   // drop
   dragDrop(ev) {
     ev.preventDefault()
-    console.log('ev.target ' + ev.target);
+    console.log('ev.target ' + ev.target.id);
+    console.log('ev.currentTarget ' + ev.currentTarget.id);
+    console.log('listTarget ' + this.listTarget.id);
+    if( this.hasTaskTarget ) { console.log('taskTarget ' + this.taskTarget.id) };
     this.#getTarget(ev.target);
     var dropTarget = document.getElementById(this.buster);
     console.log('dropTarget ' + dropTarget.id);
     let dragee = document.getElementById(ev.dataTransfer.getData("dragee"));
     console.log('dragee ' + dragee.id);
 
-    if (dropTarget.id.includes('list_')) {
-      dropTarget.appendChild(dragee);
-    } else if (dropTarget.id.includes('task_')) {
-      dropTarget.after(dragee);
-    }
+    this.#fumble(dropTarget, dragee)
   }
 
   // dragover
@@ -59,5 +59,13 @@ export default class extends Controller {
     } else {
       this.#getTarget(node.parentElement);
     }
+  }
+
+  #fumble(dropTarget, dragee) {
+    if (dropTarget.id.includes('list_')) {
+          dropTarget.appendChild(dragee);
+        } else if (dropTarget.id.includes('task_')) {
+          dropTarget.after(dragee);
+        }
   }
 }
