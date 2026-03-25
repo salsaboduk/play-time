@@ -1,5 +1,5 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[show edit update destroy]
+  before_action :set_task, only: %i[show edit update destroy move]
 
   # GET /tasks or /tasks.json
   def index
@@ -58,11 +58,21 @@ class TasksController < ApplicationController
 
   # PUT /tasks/1/move
   def move
-    if task_params(:target).include? 'list'
+    if task_params[:target_type] == 'list'
       # move task to top of list
-    elsif task_params(:target).include? 'task'
+      target_list = List.find(task_params[:target_id])
+      @task.update list: target_list
+      @task.update position: :first
+    elsif task_params[:target_type] == 'task'
       # move task after target task
+      target_task = Task.find(task_params[:target_id])
+      @task.update! list: target_task.list
+      @task.update! position: { after: target_task }
     end
+
+    # respond_to do |format|
+    #   format.turbo_stream if @task.save
+    # end
   end
 
   private
@@ -74,6 +84,6 @@ class TasksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def task_params
-    params.expect(task: %i[name list_id position target])
+    params.expect(task: %i[name list_id position target_id target_type])
   end
 end
