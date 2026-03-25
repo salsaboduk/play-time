@@ -29,7 +29,8 @@ export default class extends Controller {
     let dragee = document.getElementById(ev.dataTransfer.getData("dragee"));
     console.log('dragee ' + dragee.id);
 
-    this.#fumble(dropTarget, dragee)
+    // this.#fumble(dropTarget, dragee)
+    this.grumble(dropTarget, dragee)
   }
 
   // dragover
@@ -67,5 +68,30 @@ export default class extends Controller {
         } else if (dropTarget.id.includes('task_')) {
           dropTarget.after(dragee);
         }
+  }
+
+  grumble(dropTarget, dragee) {
+    let dropTargetType = dropTarget.id.split('_')[0]
+    let dropTargetId = dropTarget.id.split('_')[1]
+    let drageeId = dragee.id.split('_')[1]
+
+    let token = document.querySelector('meta[name="csrf-token"]').content
+
+    fetch('/tasks/' + drageeId + '/move', {
+      method: 'PUT',
+      headers: {
+        "Content-Type": "application/json",
+        "X-CSRF-Token": token,
+        "Accept": "text/vnd.turbo-stream.html"
+      },
+      body: JSON.stringify({
+        task: {
+          target_id: dropTargetId,
+          target_type: dropTargetType
+        }
+      })
+    })
+    .then(responce => responce.text())
+
   }
 }
