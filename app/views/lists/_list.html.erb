@@ -4,7 +4,7 @@
   <div class='list-head text-center'>
     <%= list.name %>
   </div>
-  <% list.task.each do |task| %>
+  <% list.tasks.ordered.each do |task| %>
     <%= render task %>
   <% end %>
 </div>
