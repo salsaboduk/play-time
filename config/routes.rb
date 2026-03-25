@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  resources :tasks
+  resources :tasks do
+    member do
+      put 'move'
+    end
+  end
   resources :lists
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
