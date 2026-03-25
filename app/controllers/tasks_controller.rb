@@ -7,8 +7,7 @@ class TasksController < ApplicationController
   end
 
   # GET /tasks/1 or /tasks/1.json
-  def show
-  end
+  def show; end
 
   # GET /tasks/new
   def new
@@ -16,8 +15,7 @@ class TasksController < ApplicationController
   end
 
   # GET /tasks/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /tasks or /tasks.json
   def create
@@ -58,6 +56,15 @@ class TasksController < ApplicationController
     end
   end
 
+  # PUT /tasks/1/move
+  def move
+    if task_params(:target).include? 'list'
+      # move task to top of list
+    elsif task_params(:target).include? 'task'
+      # move task after target task
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -67,6 +74,6 @@ class TasksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def task_params
-    params.expect(task: %i[name list_id position])
+    params.expect(task: %i[name list_id position target])
   end
 end
