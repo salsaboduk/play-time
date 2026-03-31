@@ -4,7 +4,9 @@
   <div class='list-head text-center'>
     <%= list.name %>
   </div>
-  <% list.tasks.ordered.each do |task| %>
-    <%= render task %>
-  <% end %>
+  <turbo-frame id='<%= dom_id list, 'tasks' %>'>
+    <% list.tasks.ordered.each do |task| %>
+      <%= render task %>
+    <% end %>
+  </turbo-frame>
 </div>
