@@ -1,4 +1,7 @@
 class TasksController < ApplicationController
+  include ActionView::RecordIdentifier
+  include ActionView::Helpers::TextHelper
+
   before_action :set_task, only: %i[show edit update destroy move]
 
   # GET /tasks or /tasks.json
@@ -58,21 +61,20 @@ class TasksController < ApplicationController
 
   # PUT /tasks/1/move
   def move
+    current_list = @task.list
     if task_params[:target_type] == 'list'
       # move task to top of list
-      target_list = List.find(task_params[:target_id])
-      @task.update list: target_list
+      @task.update list: @list
       @task.update position: :first
     elsif task_params[:target_type] == 'task'
       # move task after target task
       target_task = Task.find(task_params[:target_id])
-      @task.update! list: target_task.list
-      @task.update! position: { after: target_task }
+      @task.update list: @list
+      @task.update position: { after: target_task }
     end
 
-    # respond_to do |format|
-    #   format.turbo_stream if @task.save
-    # end
+    render turbo_stream: [turbo_stream.replace(dom_id(@list, 'tasks'), @list.tasks.ordered),
+                          turbo_stream.replace(dom_id(current_list, 'tasks'), current_list.tasks.ordered)]
   end
 
   private

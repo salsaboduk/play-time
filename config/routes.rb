@@ -1,10 +1,12 @@
 Rails.application.routes.draw do
-  resources :tasks do
-    member do
-      put 'move'
+  resources :tasks
+  resources :lists do
+    resources :tasks, module: :lists do
+      member do
+        put 'move'
+      end
     end
   end
-  resources :lists
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.

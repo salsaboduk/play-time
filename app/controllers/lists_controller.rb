@@ -1,3 +1,4 @@
+# Controlls actions on a list
 class ListsController < ApplicationController
   before_action :set_list, only: %i[show edit update destroy]
 
@@ -7,8 +8,7 @@ class ListsController < ApplicationController
   end
 
   # GET /lists/1 or /lists/1.json
-  def show
-  end
+  def show; end
 
   # GET /lists/new
   def new
@@ -16,8 +16,7 @@ class ListsController < ApplicationController
   end
 
   # GET /lists/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /lists or /lists.json
   def create
