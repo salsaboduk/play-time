@@ -73,8 +73,18 @@ class TasksController < ApplicationController
       @task.update position: { after: target_task }
     end
 
-    render turbo_stream: [turbo_stream.replace(dom_id(@list, 'tasks'), @list.tasks.ordered),
-                          turbo_stream.replace(dom_id(current_list, 'tasks'), current_list.tasks.ordered)]
+    render turbo_stream: [
+      turbo_stream.replace(
+        dom_id(@list, 'tasks'),
+        partial: 'lists/list',
+        locals: { list: @list }
+      ),
+      turbo_stream.replace(
+        dom_id(current_list, 'tasks'),
+        partial: 'lists/list',
+        locals: { list: current_list }
+      )
+    ]
   end
 
   private
