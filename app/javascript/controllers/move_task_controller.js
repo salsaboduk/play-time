@@ -74,10 +74,13 @@ export default class extends Controller {
     let dropTargetType = dropTarget.id.split('_')[0]
     let dropTargetId = dropTarget.id.split('_')[1]
     let drageeId = dragee.id.split('_')[1]
+    let targetListId = this.listTarget.id.split('_')[1]
+
+    let url = '/lists/' + targetListId + '/tasks/' + drageeId + '/move'
 
     let token = document.querySelector('meta[name="csrf-token"]').content
 
-    fetch('/tasks/' + drageeId + '/move', {
+    fetch(url, {
       method: 'PUT',
       headers: {
         "Content-Type": "application/json",
@@ -92,6 +95,9 @@ export default class extends Controller {
       })
     })
     .then(responce => responce.text())
+    .then(turboStreamHTML => {
+      Turbo.renderStreamMessage(turboStreamHTML)
+    })
 
   }
 }
