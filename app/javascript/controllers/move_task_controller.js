@@ -94,7 +94,7 @@ export default class extends Controller {
         }
       })
     })
-    .then(responce => responce.text())
+    .then(response => response.text())
     .then(turboStreamHTML => {
       Turbo.renderStreamMessage(turboStreamHTML)
     })
