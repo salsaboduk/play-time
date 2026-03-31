@@ -9,7 +9,13 @@ AllCops:
 Metrics/BlockLength:
   Max: 100
 
-Style/FrozenStringLiteralComment:
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/AbcSize:
+  Enabled: false
+
+Rails/Rails/I18nLocaleTexts:
   Enabled: false
 
 RSpec/DescribedClass:
@@ -19,4 +25,7 @@ RSpec/ImplicitExpect:
   Enabled: false
 
 RSpec/MultipleExpectations:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
   Enabled: false
