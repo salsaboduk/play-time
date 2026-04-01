@@ -1,5 +1,5 @@
 
-  <turbo-frame class='col' id='<%= dom_id(list, 'tasks') %>'> 
+  <turbo-frame class='col no-pad' id='<%= dom_id(list, 'tasks') %>'> 
     <div id='<%= dom_id list %>' class='list' data-controller="move-task" 
      data-move-task-target='list'  data-action='drop->move-task#dragDrop dragover->move-task#allowDrop'>
       <div class='list-head text-center'>
