@@ -21,6 +21,9 @@ gem 'bootstrap', '~> 5.3.5'
 gem 'dartsass-rails', '~> 0.5.1'
 gem 'foreman', '~> 0.90.0'
 
+# Positioning for tasks
+gem 'positioning', '~> 0.4.7'
+
 # Use Active Model has_secure_password [https://guides.rubyonrails.org/active_model_basics.html#securepassword]
 # gem "bcrypt", "~> 3.1.7"
 

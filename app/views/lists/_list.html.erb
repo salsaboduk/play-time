@@ -1,10 +1,12 @@
-
-<div id='<%= dom_id list %>' class='col list' data-controller="move-task" 
+  <turbo-frame class='col no-pad' id='<%= dom_id(list, 'tasks') %>'> 
+    <div id='<%= dom_id list %>' class='list' data-controller="move-task" 
      data-move-task-target='list'  data-action='drop->move-task#dragDrop dragover->move-task#allowDrop'>
-  <div class='list-head text-center'>
-    <%= list.name %>
-  </div>
-  <% list.task.each do |task| %>
-    <%= render task %>
-  <% end %>
-</div>
+      <div class='list-head text-center'>
+        <%= list.name %>
+      </div>
+        <% list.tasks.ordered.each do |task| %>
+          <%= render partial: 'tasks/task', locals: { task: task } %>
+        <% end %>
+    </div>
+  </turbo-frame>
+  

@@ -1,5 +1,8 @@
 class TasksController < ApplicationController
-  before_action :set_task, only: %i[show edit update destroy]
+  include ActionView::RecordIdentifier
+  include ActionView::Helpers::TextHelper
+
+  before_action :set_task, only: %i[show edit update destroy move]
 
   # GET /tasks or /tasks.json
   def index
@@ -7,8 +10,7 @@ class TasksController < ApplicationController
   end
 
   # GET /tasks/1 or /tasks/1.json
-  def show
-  end
+  def show; end
 
   # GET /tasks/new
   def new
@@ -16,8 +18,7 @@ class TasksController < ApplicationController
   end
 
   # GET /tasks/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /tasks or /tasks.json
   def create
@@ -58,6 +59,34 @@ class TasksController < ApplicationController
     end
   end
 
+  # PUT /tasks/1/move
+  def move
+    current_list = @task.list
+    if task_params[:target_type] == 'list'
+      # move task to top of list
+      @task.update list: @list
+      @task.update position: :first
+    elsif task_params[:target_type] == 'task'
+      # move task after target task
+      target_task = Task.find(task_params[:target_id])
+      @task.update list: @list
+      @task.update position: { after: target_task }
+    end
+
+    render turbo_stream: [
+      turbo_stream.replace(
+        dom_id(@list, 'tasks'),
+        partial: 'lists/list',
+        locals: { list: @list }
+      ),
+      turbo_stream.replace(
+        dom_id(current_list, 'tasks'),
+        partial: 'lists/list',
+        locals: { list: current_list }
+      )
+    ]
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -67,6 +96,6 @@ class TasksController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def task_params
-    params.expect(task: %i[name list_id position])
+    params.expect(task: %i[name list_id position target_id target_type])
   end
 end
