@@ -22,15 +22,13 @@ export default class extends Controller {
     console.log('ev.target ' + ev.target.id);
     console.log('ev.currentTarget ' + ev.currentTarget.id);
     console.log('listTarget ' + this.listTarget.id);
-    if( this.hasTaskTarget ) { console.log('taskTarget ' + this.taskTarget.id) };
+    if (this.hasTaskTarget) { console.log('taskTarget ' + this.taskTarget.id) };
     this.#getTarget(ev.target);
     var dropTarget = document.getElementById(this.buster);
     console.log('dropTarget ' + dropTarget.id);
     let dragee = document.getElementById(ev.dataTransfer.getData("dragee"));
     console.log('dragee ' + dragee.id);
-
-    // this.#fumble(dropTarget, dragee)
-    this.grumble(dropTarget, dragee)
+    this.updatePosition(dropTarget, dragee)
   }
 
   // dragover
@@ -62,15 +60,7 @@ export default class extends Controller {
     }
   }
 
-  #fumble(dropTarget, dragee) {
-    if (dropTarget.id.includes('list_')) {
-          dropTarget.appendChild(dragee);
-        } else if (dropTarget.id.includes('task_')) {
-          dropTarget.after(dragee);
-        }
-  }
-
-  grumble(dropTarget, dragee) {
+  updatePosition(dropTarget, dragee) {
     let dropTargetType = dropTarget.id.split('_')[0]
     let dropTargetId = dropTarget.id.split('_')[1]
     let drageeId = dragee.id.split('_')[1]
@@ -94,10 +84,10 @@ export default class extends Controller {
         }
       })
     })
-    .then(response => response.text())
-    .then(turboStreamHTML => {
-      Turbo.renderStreamMessage(turboStreamHTML)
-    })
+      .then(response => response.text())
+      .then(turboStreamHTML => {
+        Turbo.renderStreamMessage(turboStreamHTML)
+      })
 
   }
 }
